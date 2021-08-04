@@ -16,6 +16,7 @@
     "format": "vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.php --allow-risky=yes"
   },
   "require-dev": {
+    "roave/security-advisories": "dev-latest",
     "friendsofphp/php-cs-fixer": "^3.0",
     "phpunit/phpunit": "^9.5"
   },
