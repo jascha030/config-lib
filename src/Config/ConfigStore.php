@@ -4,7 +4,7 @@ namespace Jascha030\ConfigurationLib\Config;
 
 use Symfony\Component\Finder\Finder;
 
-class Config
+class ConfigStore
 {
     private array $directories;
 
@@ -54,16 +54,6 @@ class Config
         }
     }
 
-    private function createFinder(): Finder
-    {
-        $this->finder = (new Finder())
-            ->in($this->directories)
-            ->files()
-            ->name('*.php');
-
-        return $this->finder;
-    }
-
     public function addConfigDirectory(string $directory): void
     {
         if (! is_dir($directory)) {
@@ -71,5 +61,12 @@ class Config
         }
 
         $this->directories[] = $directory;
+    }
+
+    private function createFinder(): Finder
+    {
+        $this->finder = (new Finder())->in($this->directories)->files()->name('*.php');
+
+        return $this->finder;
     }
 }
