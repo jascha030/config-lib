@@ -4,7 +4,7 @@ namespace Jascha030\ConfigurationLib\Config;
 
 use Symfony\Component\Finder\Finder;
 
-class ConfigStore
+class ConfigStore implements ConfigStoreInterface
 {
     private array $directories;
 
@@ -37,7 +37,7 @@ class ConfigStore
         }
     }
 
-    public function load(): self
+    public function load(): ConfigStoreInterface
     {
         $iterator = $this->createFinder()->getIterator();
 
@@ -69,12 +69,7 @@ class ConfigStore
     }
 
     /**
-     * Retrieve an option by key, dot notation can be used to specify which file needs to be searched.
-     * E.g. user.firstName would retrieve the firstName option from config file; user.php
-     *
-     * @param string $option
-     *
-     * @return mixed
+     * @inheritdoc
      */
     public function get(string $option)
     {
