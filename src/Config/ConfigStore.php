@@ -8,8 +8,6 @@ class ConfigStore
 {
     private array $directories;
 
-    private Finder $finder;
-
     private array $config;
 
     public function __construct($directories)
@@ -63,10 +61,70 @@ class ConfigStore
         $this->directories[] = $directory;
     }
 
-    private function createFinder(): Finder
+    public function createFinder(): Finder
     {
-        $this->finder = (new Finder())->in($this->directories)->files()->name('*.php');
+        return (new Finder())->in($this->directories)->files()->name('*.php');
+    }
 
-        return $this->finder;
+    /**
+     * Retrieve an option by key, dot notation can be used to specify which file needs to be searched.
+     * E.g. user.firstName would retrieve the firstName option from config file; user.php
+     *
+     * @param string $option
+     *
+     * @return mixed
+     */
+    public function get(string $option)
+    {
+        if (strpos($option, '.') !== false) {
+            $optionArray = explode('.', $option);
+
+            if (! $this->hasKey($optionArray[0], $optionArray[1])) {
+                throw new \RuntimeException("Option: \"{$optionArray[1]}\" does not exist in config: \"{$optionArray[0]}\"");
+            }
+
+            return $this->config[$option[0]][$option[1]];
+        }
+
+        $file = $this->getFileByOptionKey($option);
+
+        return $this->config[$file][$option];
+    }
+
+    public function getConfig(string $fileName): array
+    {
+        return $this->config[$fileName];
+    }
+
+    public function keyExists(string $key): bool
+    {
+        foreach ($this->config as $configurations) {
+            if (array_key_exists($key, $configurations)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function getFileByOptionKey(string $key): string
+    {
+        foreach ($this->config as $file => $configurations) {
+            if (array_key_exists($key, $configurations)) {
+                return $file;
+            }
+        }
+
+        throw new \RuntimeException("Option: \"{$key}\" does not exist.");
+    }
+
+    public function hasKey(string $filename, string $key): bool
+    {
+        return isset($this->config[$filename][$key]);
+    }
+
+    public function configFileExists(string $fileName): bool
+    {
+        return isset($this->config[$fileName]);
     }
 }
