@@ -4,11 +4,9 @@ namespace Jascha030\ConfigurationLib\Config;
 
 use Symfony\Component\Finder\Finder;
 
-class Config
+class ConfigStore implements ConfigStoreInterface
 {
     private array $directories;
-
-    private Finder $finder;
 
     private array $config;
 
@@ -39,7 +37,7 @@ class Config
         }
     }
 
-    public function load(): void
+    public function load(): ConfigStoreInterface
     {
         $iterator = $this->createFinder()->getIterator();
 
@@ -50,18 +48,10 @@ class Config
                 throw new \RuntimeException("Invalid config \"{$file->getRealPath()}\", Config files should return an array.");
             }
 
-            $this->config[$file->getBasename()] = $config;
+            $this->config[$file->getBasename('.php')] = $config;
         }
-    }
 
-    private function createFinder(): Finder
-    {
-        $this->finder = (new Finder())
-            ->in($this->directories)
-            ->files()
-            ->name('*.php');
-
-        return $this->finder;
+        return $this;
     }
 
     public function addConfigDirectory(string $directory): void
@@ -71,5 +61,67 @@ class Config
         }
 
         $this->directories[] = $directory;
+    }
+
+    public function createFinder(): Finder
+    {
+        return (new Finder())->in($this->directories)->files()->name('*.php');
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function get(string $option)
+    {
+        if (strpos($option, '.') !== false) {
+            $optionArray = explode('.', $option);
+
+            if (! $this->hasKey($optionArray[0], $optionArray[1])) {
+                throw new \RuntimeException("Option: \"{$optionArray[1]}\" does not exist in config: \"{$optionArray[0]}\"");
+            }
+
+            return $this->config[$optionArray[0]][$optionArray[1]];
+        }
+
+        $file = $this->getFileByOptionKey($option);
+
+        return $this->config[$file][$option];
+    }
+
+    public function getConfig(string $fileName): array
+    {
+        return $this->config[$fileName];
+    }
+
+    public function keyExists(string $key): bool
+    {
+        foreach ($this->config as $configurations) {
+            if (array_key_exists($key, $configurations)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function getFileByOptionKey(string $key): string
+    {
+        foreach ($this->config as $file => $configurations) {
+            if (array_key_exists($key, $configurations)) {
+                return $file;
+            }
+        }
+
+        throw new \RuntimeException("Option: \"{$key}\" does not exist.");
+    }
+
+    public function hasKey(string $filename, string $key): bool
+    {
+        return isset($this->config[$filename][$key]);
+    }
+
+    public function configFileExists(string $fileName): bool
+    {
+        return isset($this->config[$fileName]);
     }
 }
