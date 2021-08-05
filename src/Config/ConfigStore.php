@@ -37,7 +37,7 @@ class ConfigStore
         }
     }
 
-    public function load(): void
+    public function load(): self
     {
         $iterator = $this->createFinder()->getIterator();
 
@@ -48,8 +48,10 @@ class ConfigStore
                 throw new \RuntimeException("Invalid config \"{$file->getRealPath()}\", Config files should return an array.");
             }
 
-            $this->config[$file->getBasename()] = $config;
+            $this->config[$file->getBasename('.php')] = $config;
         }
+
+        return $this;
     }
 
     public function addConfigDirectory(string $directory): void
@@ -83,7 +85,7 @@ class ConfigStore
                 throw new \RuntimeException("Option: \"{$optionArray[1]}\" does not exist in config: \"{$optionArray[0]}\"");
             }
 
-            return $this->config[$option[0]][$option[1]];
+            return $this->config[$optionArray[0]][$optionArray[1]];
         }
 
         $file = $this->getFileByOptionKey($option);
