@@ -1,26 +1,33 @@
 {
   "name": "jascha030/config-lib",
-  "autoload": {
-    "psr-4": {
-      "Jascha030\\ConfigurationLib\\": "src/"
-    }
-  },
   "authors": [
     {
       "name": "Jascha030",
       "email": "contact@jaschavanaalst.nl"
     }
   ],
-  "scripts": {
-    "phpunit": "vendor/bin/phpunit",
-    "format": "vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.php --allow-risky=yes"
+  "minimum-stability": "stable",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "Jascha030\\ConfigurationLib\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Jascha030\\ConfigurationLib\\Test\\": "tests/"
+    }
+  },
+  "require": {
+    "symfony/finder": "^5.3"
   },
   "require-dev": {
     "roave/security-advisories": "dev-latest",
     "friendsofphp/php-cs-fixer": "^3.0",
     "phpunit/phpunit": "^9.5"
   },
-  "require": {
-    "symfony/finder": "^5.3"
+  "scripts": {
+    "phpunit": "vendor/bin/phpunit",
+    "format": "vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.php --allow-risky=yes"
   }
 }

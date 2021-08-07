@@ -37,6 +37,9 @@ class ConfigStore implements ConfigStoreInterface
         }
     }
 
+    /**
+     * @inheritdoc
+     */
     public function load(): ConfigStoreInterface
     {
         $iterator = $this->createFinder()->getIterator();
@@ -54,6 +57,9 @@ class ConfigStore implements ConfigStoreInterface
         return $this;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function addConfigDirectory(string $directory): void
     {
         if (! is_dir($directory)) {
@@ -88,11 +94,17 @@ class ConfigStore implements ConfigStoreInterface
         return $this->config[$file][$option];
     }
 
+    /**
+     * @inheritdoc
+     */
     public function getConfig(string $fileName): array
     {
         return $this->config[$fileName];
     }
 
+    /**
+     * @inheritdoc
+     */
     public function keyExists(string $key): bool
     {
         foreach ($this->config as $configurations) {
@@ -104,6 +116,9 @@ class ConfigStore implements ConfigStoreInterface
         return false;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function getFileByOptionKey(string $key): string
     {
         foreach ($this->config as $file => $configurations) {
@@ -115,11 +130,17 @@ class ConfigStore implements ConfigStoreInterface
         throw new \RuntimeException("Option: \"{$key}\" does not exist.");
     }
 
+    /**
+     * @inheritdoc
+     */
     public function hasKey(string $filename, string $key): bool
     {
         return isset($this->config[$filename][$key]);
     }
 
+    /**
+     * @inheritdoc
+     */
     public function configFileExists(string $fileName): bool
     {
         return isset($this->config[$fileName]);
