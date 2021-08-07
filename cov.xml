@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1628367136">
-  <project timestamp="1628367136">
+<coverage generated="1628368360">
+  <project timestamp="1628368360">
     <file name="/Users/jascha030/.development/Projects/Composer/configuration-lib/src/Config/ConfigStore.php">
       <class name="Jascha030\ConfigurationLib\Config\ConfigStore" namespace="global">
         <metrics complexity="26" methods="10" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="43" coveredstatements="37" elements="53" coveredelements="43"/>
