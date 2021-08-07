@@ -1,4 +1,4 @@
-# Composer project template
+# PHP Config Library
 
 Description: Minimal library for handling PHP Array config files.
 
