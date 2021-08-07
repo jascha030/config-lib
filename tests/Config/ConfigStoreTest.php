@@ -54,7 +54,7 @@ class ConfigStoreTest extends TestCase
      * @depends testConstruct
      * @noinspection UnnecessaryAssertionInspection
      */
-    public function testCreateFinder(ConfigStoreInterface $store): void
+    public function testCreateFinder(ConfigStore $store): void
     {
         $finder = $store->createFinder();
 

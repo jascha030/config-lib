@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1628177887">
-  <project timestamp="1628177887">
+<coverage generated="1628367136">
+  <project timestamp="1628367136">
     <file name="/Users/jascha030/.development/Projects/Composer/configuration-lib/src/Config/ConfigStore.php">
       <class name="Jascha030\ConfigurationLib\Config\ConfigStore" namespace="global">
         <metrics complexity="26" methods="10" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="43" coveredstatements="37" elements="53" coveredelements="43"/>
@@ -61,8 +61,8 @@
       <metrics loc="127" ncloc="124" classes="1" methods="10" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="43" coveredstatements="37" elements="53" coveredelements="43"/>
     </file>
     <file name="/Users/jascha030/.development/Projects/Composer/configuration-lib/src/Config/ConfigStoreInterface.php">
-      <metrics loc="34" ncloc="26" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      <metrics loc="32" ncloc="24" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
-    <metrics files="2" loc="161" ncloc="150" classes="1" methods="10" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="43" coveredstatements="37" elements="53" coveredelements="43"/>
+    <metrics files="2" loc="159" ncloc="148" classes="1" methods="10" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="43" coveredstatements="37" elements="53" coveredelements="43"/>
   </project>
 </coverage>
