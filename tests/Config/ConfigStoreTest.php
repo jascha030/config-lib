@@ -1,6 +1,6 @@
 <?php
 
-namespace Config;
+namespace Jascha030\ConfigurationLib\Test\Config;
 
 use Jascha030\ConfigurationLib\Config\ConfigStore;
 use Jascha030\ConfigurationLib\Config\ConfigStoreInterface;
@@ -54,7 +54,7 @@ class ConfigStoreTest extends TestCase
      * @depends testConstruct
      * @noinspection UnnecessaryAssertionInspection
      */
-    public function testCreateFinder(ConfigStoreInterface $store): void
+    public function testCreateFinder(ConfigStore $store): void
     {
         $finder = $store->createFinder();
 
