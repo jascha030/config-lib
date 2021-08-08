@@ -12,7 +12,7 @@ Description: Minimal library for handling PHP Array config files.
 ### Installation
 
 ```shell
-composer require jascha030/composer-template
+composer require jascha030/config-lib
 ```
 
 #### Distribution
@@ -20,7 +20,7 @@ composer require jascha030/composer-template
 Alternative steps for dist build.
 
 ```shell
-composer require --no-dev jascha030/composer-template
+composer require --no-dev jascha030/config-lib
 ```
 
 ## Usage
